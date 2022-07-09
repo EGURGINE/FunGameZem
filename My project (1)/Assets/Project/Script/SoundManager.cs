@@ -2,15 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum BgmType
+{
+    title,
+    ingame
+}
+
+
+
 public class SoundManager : MonoBehaviour
 {
     [SerializeField] 
     public Dictionary<int, AudioClip> oAudioClipsMap = new Dictionary<int, AudioClip>();
     public AudioSource oAS_Once = null;
-    public AudioSource oAS_Loop = null;
+    public AudioSource[] oAS_Loop = null;
 
     private static SoundManager _instance = null;
-    public static SoundManager Instance
+    public static SoundManager instance
     {
         get
         {
@@ -37,8 +45,8 @@ public class SoundManager : MonoBehaviour
         oAS_Once = oGameManager.AddComponent<AudioSource>();
         oAS_Once.loop = false;
 
-        oAS_Loop = oGameManager.AddComponent<AudioSource>();
-        oAS_Loop.loop = true;
+        oAS_Loop[((int)BgmType.ingame)] = oGameManager.AddComponent<AudioSource>();
+        oAS_Loop[((int)BgmType.ingame)].loop = true;
     }
 
     public void Regist(int iInAudioKey, AudioClip oInAudioClip)
@@ -64,9 +72,9 @@ public class SoundManager : MonoBehaviour
         if (bIsLoop)
         {
             Debug.Assert(oAS_Loop != null, "AudioSource is null!");
-            oAS_Loop.Stop();
-            oAS_Loop.clip = oAudioClipsMap[iInAudioKey];
-            oAS_Loop.Play();
+            oAS_Loop[((int)BgmType.ingame)].Stop();
+            oAS_Loop[((int)BgmType.ingame)].clip = oAudioClipsMap[iInAudioKey];
+            oAS_Loop[((int)BgmType.ingame)].Play();
         }
         else
         {
