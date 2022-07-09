@@ -6,14 +6,38 @@ public class Inventory : MonoBehaviour
 {
     static public Inventory Instance;
     const int MaxSpell = 11;
-    [SerializeField] List<Image> cell = new List<Image>();
-    [SerializeField] Image[] spell;
+    public List<Image> cell = new List<Image>();
+    [SerializeField] GameObject[] spell;
+    [SerializeReference] public GameObject[] InVen = new GameObject[10];
+    public bool isCol = false;
     private void Awake()
     {
         Instance = this;
     }
-
+    public void ReMove(GameObject obj)
+    {
+        for (int i = 0; i < InVen.Length; i++)
+        {
+            if (InVen[i] == obj)
+            {
+                InVen[i] = null;
+            }
+        }
+    }
     public void SpellDrop()
     {
+        for (int i = 0; i < InVen.Length; i++)
+        {
+            if (InVen[i] == null)
+            {
+                InVen[i] = Instantiate(spell[Random.Range(0,spell.Length)]);
+                //InVen[i] = Instantiate(spell[Random.Range(0, MaxSpell)]);
+                //InVen[i].GetComponent<Spell>().invenPos = cell[i].transform.position;
+                InVen[i].GetComponent<Items>().invenPos = cell[i].transform.position;
+                InVen[i].transform.position = cell[i].transform.position;
+
+                break;
+            }
+        }
     }
 }

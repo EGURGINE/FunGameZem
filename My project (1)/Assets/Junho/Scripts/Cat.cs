@@ -24,8 +24,9 @@ public class Cat : MonoBehaviour
 
     public bool miss = false;
 
-    [SerializeField] private float hp;
-    public float Hp
+    private int shilld;
+    [SerializeField] private int hp;
+    public int Hp
     {
         get
         {
@@ -38,18 +39,23 @@ public class Cat : MonoBehaviour
                 miss = false;
                 return;
             }
+            if (shilld<value)
+            {
+                hp -= (value - shilld);
+            }
+            else shilld -= value;
+
             if (hp - value <= 0)
             {
                 Die();
             }
-            hp = value;
 
         }
     }
 
-    [SerializeField] private float dmg;
+    [SerializeField] private int dmg;
 
-    public float Dmg
+    public int Dmg
     {
         get
         {
@@ -64,63 +70,85 @@ public class Cat : MonoBehaviour
 
     private void Die()
     {
+        GameManager.Instance.CatsSelect.Remove(gameObject);
         gameObject.SetActive(false);
     }
     public void Attack()
     {
-        GameManager.Instance.Enemys[0].GetComponent<BasicEnemy>().Hp -= dmg;
+        Vector3 startPos = transform.position;
+        transform.DOMove(GameManager.Instance.Enemys[0].transform.position, 0.5f).OnComplete(() =>
+            {
+                print("dd");
+                transform.DOMove(startPos, 0.2f);
+            });
+        GameManager.Instance.Enemys[0].GetComponent<BasicEnemy>().Hp = dmg;
     }
     public void SpawnCat(int _star, CatType type)
     {
         star = _star;
         catType = type;
-        this.GetComponent<Image>().sprite = CatsImg[((int)catType)];
+        gameObject.GetComponent<Image>().sprite = CatsImg[((int)catType)];
         State();
 
+    }
+    public void Item(int _star, ItemType itemType)
+    {
+        switch (itemType)
+        {
+            case ItemType.AD:
+                dmg += 30 * _star;
+                break;
+            case ItemType.HP:
+                hp += 50 * _star;
+                break;
+            case ItemType.DEF:
+                shilld += 50 * _star;
+                break;
+        }
     }
     private void State()
     {
         switch (catType)
         {
             case CatType.a:
-                hp = 100 + star * 50;
-                dmg = 10 + star * 50;
-                break;
-            case CatType.b:
-                hp = 100 + star * 50;
-                dmg = 10 + star * 50;
-                break;
-            case CatType.c:
-                hp = 100 + star * 50;
-                dmg = 10 + star * 50;
-                break;
-            case CatType.d:
-                hp = 100 + star * 50;
-                dmg = 10 + star * 50;
-                break;
-            case CatType.e:
-                hp = 100 + star * 50;
-                dmg = 10 + star * 50;
-                break;
-            case CatType.f:
-                hp = 100 + star * 50;
-                dmg = 10 + star * 50;
-                break;
-            case CatType.g:
-                hp = 100 + star * 50;
-                dmg = 10 + star * 50;
-                break;
-            case CatType.h:
-                hp = 100 + star * 50;
-                dmg = 10 + star * 50;
-                break;
-            case CatType.i:
-                hp = 100 + star * 50;
-                dmg = 10 + star * 50;
-                break;
-            case CatType.j:
-                hp = 100 + star * 50;
-                dmg = 10 + star * 50;
+                hp = 100 + star * 10;
+                dmg = 10 + star * 10;
+                break;            
+            case CatType.b:       
+                hp = 100 + star * 10;
+                dmg = 10 + star * 10;
+                break;            
+            case CatType.c:       
+                hp = 100 + star * 10;
+                dmg = 10 + star * 10;
+                break;            
+            case CatType.d:       
+                hp = 100 + star * 10;
+                dmg = 10 + star * 10;
+                break;            
+            case CatType.e:       
+                hp = 100 + star * 10;
+                dmg = 10 + star * 10;
+                break;            
+            case CatType.f:       
+                hp = 100 + star * 10;
+                dmg = 10 + star * 10;
+                break;            
+            case CatType.g:       
+                hp = 100 + star * 10;
+                dmg = 10 + star * 10;
+                break;            
+            case CatType.h:       
+                hp = 100 + star * 10;
+                dmg = 10 + star * 10;
+                break;            
+            case CatType.i:       
+                hp = 100 + star * 10;
+                dmg = 10 + star * 10;
+                break;            
+            case CatType.j:       
+                hp = 100 + star * 10;
+                dmg = 10 + star * 10;
                 break;
         }
     }

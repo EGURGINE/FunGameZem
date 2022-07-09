@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum SpellType{
+public enum SpellType
+{
     //물리 공격
     nail,
     bite,
@@ -23,10 +24,56 @@ public enum SpellType{
 }
 public class Spell : MonoBehaviour
 {
-    SpellType type;
-    public void SpellSlect(SpellType _type)
+    public Vector3 invenPos;
+    [SerializeField] SpellType type;
+    private bool thisCol;
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        type = _type;
+        if (collision.CompareTag("SpellSlect"))
+        {
+            thisCol = true;
+            Inventory.Instance.isCol = true;
+            GameManager.Instance.Spell.Add(gameObject);
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("SpellSlect"))
+        {
+            thisCol = false;
+            Inventory.Instance.isCol = false;
+            GameManager.Instance.Spell.Remove(gameObject);
+
+        }
+    }
+    private void OnMouseDrag()
+    {
+        Inventory.Instance.ReMove(gameObject);
+        transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(0, 0, 10));
+    }
+    private void OnMouseUp()
+    {
+        if (Inventory.Instance.isCol && thisCol)
+        {
+            Inventory.Instance.ReMove(gameObject);
+            transform.position = GameManager.Instance.stageSlect.transform.position;
+        }
+        else
+        {
+            for (int i = 0; i < Inventory.Instance.InVen.Length; i++)
+            {
+                if (Inventory.Instance.InVen[i] == null)
+                {
+                    Inventory.Instance.InVen[i] = gameObject;
+                    transform.position = Inventory.Instance.cell[i].transform.position;
+                    break;
+                }
+            }
+            //if(GameObject.Find("Inventory").GetComponent<Inventory>().InVen.Length == 10  )
+            //{
+            //    invenPos = GameManager.Instance.stageSlect.transform.position;
+            //}
+        }
     }
     public void SpellAbility()
     {

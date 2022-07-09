@@ -13,9 +13,9 @@ public class BasicEnemy : MonoBehaviour
     [SerializeField] private EnemyType enemyType;
     [SerializeField] private Sprite[] EnemysImg;
 
-    [SerializeField] private float hp;
+    [SerializeField] private int hp;
     const float dotDealDuration = 5;
-    public float Hp
+    public int Hp
     {
         get 
         {
@@ -23,8 +23,7 @@ public class BasicEnemy : MonoBehaviour
         }
         set 
         {
-            hp = value; 
-            print(hp);
+            hp -= value;
             if (hp-value <= 0)
             {
                 Die();
@@ -33,9 +32,9 @@ public class BasicEnemy : MonoBehaviour
         }
     }
 
-    private float dmg;
+    private int dmg;
 
-    public float Dmg
+    public int Dmg
     {
         get
         {
@@ -62,7 +61,12 @@ public class BasicEnemy : MonoBehaviour
     }
     public void Attack()
     {
-        GameManager.Instance.CatsSelect[0].GetComponent<Cat>().Hp -= dmg;
+        Vector3 startPos = transform.position;
+        transform.DOMove(GameManager.Instance.CatsSelect[0].transform.position, 0.5f).OnComplete(() =>
+        {
+            transform.DOMove(startPos, 0.2f);
+        });
+        GameManager.Instance.CatsSelect[0].GetComponent<Cat>().Hp = dmg;
         //if (enemyType == EnemyType.Warrior)
         //{
         //}
