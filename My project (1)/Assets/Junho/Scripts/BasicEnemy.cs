@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
+using TMPro;
 public enum EnemyType
 {
     Archer,
@@ -12,6 +13,9 @@ public class BasicEnemy : MonoBehaviour
 {
     [SerializeField] private EnemyType enemyType;
     [SerializeField] private Sprite[] EnemysImg;
+
+    [SerializeField] private TextMeshProUGUI hpTxt;
+    [SerializeField] private TextMeshProUGUI dmgTxt;
 
     [SerializeField] private int hp;
     const float dotDealDuration = 5;
@@ -24,6 +28,7 @@ public class BasicEnemy : MonoBehaviour
         set 
         {
             hp -= value;
+            hpTxt.text = hp.ToString();
             if (hp-value <= 0)
             {
                 Die();
@@ -43,6 +48,7 @@ public class BasicEnemy : MonoBehaviour
         set
         {
             dmg = value;
+            dmgTxt.text = dmg.ToString();
         }
     }
     public void DotDeal()
@@ -55,7 +61,6 @@ public class BasicEnemy : MonoBehaviour
     }
     private void Die()
     {
-        Debug.Log("die");
         GameManager.Instance.Enemys.Remove(gameObject);
         gameObject.SetActive(false);
     }
@@ -64,9 +69,9 @@ public class BasicEnemy : MonoBehaviour
         Vector3 startPos = transform.position;
         transform.DOMove(GameManager.Instance.CatsSelect[0].transform.position, 0.5f).OnComplete(() =>
         {
+            GameManager.Instance.CatsSelect[0].GetComponent<Cat>().Hp = dmg;
             transform.DOMove(startPos, 0.2f);
         });
-        GameManager.Instance.CatsSelect[0].GetComponent<Cat>().Hp = dmg;
         //if (enemyType == EnemyType.Warrior)
         //{
         //}
@@ -80,7 +85,6 @@ public class BasicEnemy : MonoBehaviour
         enemyType = type;
         gameObject.GetComponent<Image>().sprite = EnemysImg[((int)enemyType)];
         State();
-
     }
     private void State()
     {
@@ -95,5 +99,7 @@ public class BasicEnemy : MonoBehaviour
                 dmg = 15;
                 break;
         }
+        hpTxt.text = hp.ToString();
+        dmgTxt.text = dmg.ToString();
     }
 }

@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;  
+using UnityEngine.UI;
+using DG.Tweening;
+using TMPro;
 public class GameManager : MonoBehaviour
 {
     static public GameManager Instance;
 
     const int enemyTypeNum = 2;
-    const int catsTypeNum = 10;
+    const int catsTypeNum = 5;
     const int starMax = 3;
     
     public List<GameObject> ActiveCat = new List<GameObject>();
@@ -15,21 +17,37 @@ public class GameManager : MonoBehaviour
 
     public List<GameObject> ActiveEnemys = new List<GameObject>();
     public List<GameObject> Enemys = new List<GameObject>();
+    [SerializeField] private GameObject boss;
+
     int Count=0;
-
-
     public List<GameObject> Spell = new List<GameObject>(0);
 
     public GameObject stageSlect;
 
-    private int Wave = 1;
+    private int Waeve = 1;
+    [SerializeField] private TextMeshProUGUI waeveNum;
+    private int money;
+    [SerializeField] private TextMeshProUGUI moneyTxt;
 
+    private bool isFighting = false;
+    int locknum = 0;
+    public int Money
+    {
+        get { return money; }
+        set 
+        {
+            money += value; 
+            moneyTxt.text = money.ToString();
+        }
+    }
     private void Awake()
     {
         Instance = this;
     }
     private void Start()
     {
+        Money = 5;
+        waeveNum.text = Waeve.ToString();
         foreach (var enemy in Enemys)
         {
             int enemyType = Random.Range(0, enemyTypeNum);
@@ -38,15 +56,19 @@ public class GameManager : MonoBehaviour
         }
         foreach (var cat in CatsSelect)
         {
-            int catType = Random.Range(0, 3);
-            //int catType = Random.Range(0, catsTypeNum);
+            int catType = Random.Range(0, catsTypeNum);
             int star = Random.Range(0, starMax);
             cat.GetComponent<Cat>().SpawnCat(star, (CatType)catType);
         }
     }
-
+    public void Lock(int num)
+    {
+        locknum = num;
+    }
     public void Fight()
     {
+        if (isFighting) return;
+        isFighting = true;
         StartCoroutine(FightCoroutine());
     }
     private IEnumerator FightCoroutine()
@@ -76,10 +98,12 @@ public class GameManager : MonoBehaviour
         }
         if(CatsSelect.Count == 0)
         {
+            isFighting = false;
             GameOver();
         }
         else if (Enemys.Count == 0)
         {
+            isFighting = false;
             NextWave();
         }
 
@@ -90,8 +114,11 @@ public class GameManager : MonoBehaviour
     }
     private void NextWave()
     {
+        locknum = 0;
+        Money = 5;
         Count = 0;
-        Wave++;
+        Waeve++;
+        waeveNum.text = Waeve.ToString();
         Spell.Clear();
         foreach (var enemy in ActiveEnemys)
         {
@@ -108,20 +135,24 @@ public class GameManager : MonoBehaviour
             int catType = Random.Range(0, 2);
             int star = Random.Range(0, 3);
             CatsSelect[Count].SetActive(true);
-            //int catType = Random.Range(0, catsTypeNum);
             CatsSelect[Count].GetComponent<Cat>().SpawnCat(star, (CatType)catType);
             Count ++;
         }
+        Inventory.Instance.SpellDrop();
     }
     public void Reroll()
     {
-        foreach (var cat in CatsSelect)
-        {
-            int catType = Random.Range(0, 3);
+        if (money > 0) Money = -1;
+        else return;
 
-            //int catType = Random.Range(0, catsTypeNum);
-            int star = Random.Range(0, starMax);
-            cat.GetComponent<Cat>().SpawnCat(star, (CatType)catType);
+        for (int i = 0; i < CatsSelect.Count; i++)
+        {
+            if (i != locknum - 1)
+            {
+                int catType = Random.Range(0, catsTypeNum);
+                int star = Random.Range(0, starMax);
+                CatsSelect[i].GetComponent<Cat>().SpawnCat(star, (CatType)catType);
+            }
         }
     }
 }

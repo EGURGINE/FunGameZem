@@ -60,13 +60,12 @@ public class Items : MonoBehaviour
     {
         isThouching = false;
 
-        print(isPlayer);
-        print(isItem);
         if (isPlayer)
         {
             transform.position = target.transform.position;
             Inventory.Instance.ReMove(gameObject);
             target.GetComponent<Cat>().Item(star, itemType);
+            Destroy(gameObject);
         }
         else if (isItem)
         {

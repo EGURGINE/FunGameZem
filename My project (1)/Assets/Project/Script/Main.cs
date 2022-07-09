@@ -103,9 +103,7 @@ public class Main : MonoBehaviour
 
     public void Ingame()
     {
-        b.transform.DOLocalMoveX(-300, 1f).SetLoops(1, LoopType.Incremental);
-        f.transform.DOLocalMoveX(0, 1f).SetLoops(1, LoopType.Incremental);
-
+         SceneManager.LoadScene("Main");
     }
 
     public void GameClose1()

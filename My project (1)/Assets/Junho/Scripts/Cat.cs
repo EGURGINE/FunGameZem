@@ -3,25 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using TMPro;
 public enum CatType
 {
     a,
     b,
     c,
     d,
-    e,
-    f,
-    g,
-    h,
-    i,
-    j
+    e
 }
 public class Cat : MonoBehaviour
 {
     [SerializeField] private int star;
     [SerializeField] private CatType catType;
     [SerializeField] private Sprite[] CatsImg;
-
+    [SerializeField] private TextMeshProUGUI hpTxt;
+    [SerializeField] private TextMeshProUGUI dmgTxt;
     public bool miss = false;
 
     private int shilld;
@@ -45,6 +42,8 @@ public class Cat : MonoBehaviour
             }
             else shilld -= value;
 
+            hpTxt.text = hp.ToString();
+
             if (hp - value <= 0)
             {
                 Die();
@@ -64,6 +63,7 @@ public class Cat : MonoBehaviour
         set
         {
             dmg = value;
+            dmgTxt.text = dmg.ToString();
         }
     }
 
@@ -78,10 +78,9 @@ public class Cat : MonoBehaviour
         Vector3 startPos = transform.position;
         transform.DOMove(GameManager.Instance.Enemys[0].transform.position, 0.5f).OnComplete(() =>
             {
-                print("dd");
+                GameManager.Instance.Enemys[0].GetComponent<BasicEnemy>().Hp = dmg;
                 transform.DOMove(startPos, 0.2f);
             });
-        GameManager.Instance.Enemys[0].GetComponent<BasicEnemy>().Hp = dmg;
     }
     public void SpawnCat(int _star, CatType type)
     {
@@ -89,19 +88,23 @@ public class Cat : MonoBehaviour
         catType = type;
         gameObject.GetComponent<Image>().sprite = CatsImg[((int)catType)];
         State();
-
     }
     public void Item(int _star, ItemType itemType)
     {
         switch (itemType)
         {
             case ItemType.AD:
-                dmg += 30 * _star;
+                print("dkdk");
+                dmg += (30 * _star);
+                dmgTxt.text = dmg.ToString();
                 break;
             case ItemType.HP:
-                hp += 50 * _star;
+                print("dkdk");
+                hp += (50 * _star);
+                hpTxt.text = hp.ToString();
                 break;
             case ItemType.DEF:
+        print("dkdk");
                 shilld += 50 * _star;
                 break;
         }
@@ -115,41 +118,23 @@ public class Cat : MonoBehaviour
                 dmg = 10 + star * 10;
                 break;            
             case CatType.b:       
-                hp = 100 + star * 10;
-                dmg = 10 + star * 10;
+                hp = 130 + star * 10;
+                dmg = 7 + star * 10;
                 break;            
             case CatType.c:       
-                hp = 100 + star * 10;
-                dmg = 10 + star * 10;
+                hp = 200 + star * 10;
+                dmg = 5 + star * 10;
                 break;            
             case CatType.d:       
-                hp = 100 + star * 10;
-                dmg = 10 + star * 10;
+                hp = 50 + star * 10;
+                dmg = 30 + star * 10;
                 break;            
             case CatType.e:       
-                hp = 100 + star * 10;
-                dmg = 10 + star * 10;
+                hp = 150 + star * 10;
+                dmg = 15 + star * 10;
                 break;            
-            case CatType.f:       
-                hp = 100 + star * 10;
-                dmg = 10 + star * 10;
-                break;            
-            case CatType.g:       
-                hp = 100 + star * 10;
-                dmg = 10 + star * 10;
-                break;            
-            case CatType.h:       
-                hp = 100 + star * 10;
-                dmg = 10 + star * 10;
-                break;            
-            case CatType.i:       
-                hp = 100 + star * 10;
-                dmg = 10 + star * 10;
-                break;            
-            case CatType.j:       
-                hp = 100 + star * 10;
-                dmg = 10 + star * 10;
-                break;
         }
+        dmgTxt.text = dmg.ToString();
+        hpTxt.text = hp.ToString();
     }
 }
