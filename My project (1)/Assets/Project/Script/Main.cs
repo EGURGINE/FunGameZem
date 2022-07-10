@@ -10,10 +10,10 @@ public class Main : MonoBehaviour
     [SerializeField] private GameObject c,d,e,f,g,h;
     public void PlayGame()
     {
-
-        a.transform.DOLocalMoveX(-400, 1f).SetLoops(1, LoopType.Incremental);
-        f.transform.DOLocalMoveX(0, 1f).SetLoops(1, LoopType.Incremental);
-        Application.Quit();
+        SceneManager.LoadScene("Main");
+        //a.transform.DOLocalMoveX(-400, 1f).SetLoops(1, LoopType.Incremental);
+        //f.transform.DOLocalMoveX(0, 1f).SetLoops(1, LoopType.Incremental);
+        
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 

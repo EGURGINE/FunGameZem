@@ -109,6 +109,10 @@ public class Cat : MonoBehaviour
                 break;
         }
     }
+    public void Heal(int heal)
+    {
+        hp += heal;
+    }
     private void State()
     {
         switch (catType)
