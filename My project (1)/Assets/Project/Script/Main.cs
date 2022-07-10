@@ -7,19 +7,19 @@ public class Main : MonoBehaviour
 {
     [SerializeField] private GameObject a;
     [SerializeField] private GameObject b;
-    [SerializeField] private GameObject c,d,e,f,g,h,i,j,k,l,m,n,o,p;
+    [SerializeField] private GameObject c,d,e,f,g,h;
     public void PlayGame()
     {
 
-        a.transform.DOLocalMoveX(-300, 1f).SetLoops(1, LoopType.Incremental);
-        GamePlay();
+        a.transform.DOLocalMoveX(-400, 1f).SetLoops(1, LoopType.Incremental);
+        f.transform.DOLocalMoveX(0, 1f).SetLoops(1, LoopType.Incremental);
         Application.Quit();
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void OptionGame()
     {
-        a.transform.DOLocalMoveX(-300, 1f).SetLoops(1, LoopType.Incremental);
+        a.transform.DOLocalMoveX(-400, 1f).SetLoops(1, LoopType.Incremental);
         Option();
         Application.Quit();
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
@@ -130,7 +130,6 @@ public class Main : MonoBehaviour
     {
         a.transform.DOLocalMoveX(0, 1f).SetLoops(1, LoopType.Incremental);
         g.transform.DOLocalMoveY(-400, 1f).SetLoops(1, LoopType.Incremental);
-        b.transform.DOLocalMoveX(300, 0f).SetLoops(1, LoopType.Incremental);
         f.transform.DOLocalMoveX(300, 1f).SetLoops(1, LoopType.Incremental);
         f.transform.DOLocalMoveY(0, 1f).SetLoops(1, LoopType.Incremental);
     }
