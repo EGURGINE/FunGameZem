@@ -78,13 +78,7 @@ public class BasicEnemy : MonoBehaviour
             GameManager.Instance.CatsSelect[0].GetComponent<Cat>().Hp = dmg;
             transform.DOMove(startPos, 0.2f);
         });
-        //if (enemyType == EnemyType.Warrior)
-        //{
-        //}
-        //else if (enemyType == EnemyType.Archer)
-        //{
-
-        //}
+       
     }
     public void SpawnEnemy(EnemyType type)
     {
