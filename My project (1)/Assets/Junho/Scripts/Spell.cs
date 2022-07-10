@@ -101,12 +101,12 @@ public class Spell : MonoBehaviour
                 }
                 break;
             case SpellType.grooming:
-                GameManager.Instance.CatsSelect[0].GetComponent<Cat>().Hp += 50;
+                GameManager.Instance.CatsSelect[0].GetComponent<Cat>().Hp -= 50;
                 break;
             case SpellType.bread:
                 foreach (var cat in GameManager.Instance.CatsSelect)
                 {
-                    cat.GetComponent<Cat>().Hp += 30;
+                    cat.GetComponent<Cat>().Hp -= 30;
                 }
                 break;
             case SpellType.sleep:

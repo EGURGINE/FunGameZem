@@ -225,10 +225,10 @@ MonoBehaviour:
     m_SaveData: []
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 22b30100
-      m_LastClickedID: 0
-      m_ExpandedIDs: 143ffefff63ffeffb441feffe44bfeff784efeffbc53feffcc53feff5057feffe058feffac62feffa864feff6865fefffc7afeff707cfeff3c82feff70dbfeffc6fafeffe010ffffe416ffffe616fffff216fffff416fffff616ffff0a2dffffec31ffff4632ffff9c32ffff7663ffff28b0ffff76b0ffffd2b1ffff14b3ffff42bfffffa4deffff28fbffffd8600000026100004e610000888900003c8a0000c89b0000709c0000109d000058b600007cb60000aab60000beb60000c8b60000dcb6000000b700002eb7000038b7000064b700006ab700006eb70000a2b70000c2b70000b81101001812010022120100481201006c120100d2120100dc120100e6120100f0120100021301003e13010090130100aa130100a084010060890100508a0100669a0100069b0100769c0100769d0100c49d0100c89d0100
+      scrollPos: {x: 0, y: 172.4}
+      m_SelectedIDs: 76a5fdff
+      m_LastClickedID: -154250
+      m_ExpandedIDs: 1613feff5e2afeff143ffefff63ffeffb441feffe44bfeff784efeffbc53feffcc53feff5057feffe058feffac62feffa864feff6865fefffc7afeff707cfeff3c82feff70dbfeffc6fafeffe010ffffe416ffffe616fffff216fffff416fffff616ffff0a2dffffec31ffff4632ffff9c32ffff7663ffff28b0ffff76b0ffffd2b1ffff14b3ffff42bfffffa4deffff28fbffffd8600000026100004e610000888900003c8a0000c89b0000709c0000109d000058b600007cb60000aab60000beb60000c8b60000dcb6000000b700002eb7000038b7000064b700006ab700006eb70000a2b70000c2b70000b81101001812010022120100481201006c120100d2120100dc120100e6120100f0120100021301003e13010090130100aa130100a084010060890100508a0100669a0100069b0100769c0100769d0100c49d0100c89d0100bebb010052bc01009cbc010058bd010086bd010098bd0100d4bd0100d8bd01001abe010084be0100e0be0100
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -526,9 +526,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -0.11971849, y: 1.4543129, z: 2134.7102}
+    m_Target: {x: -1.1611614, y: 3.9276958, z: 170.00839}
     speed: 2
-    m_Value: {x: -0.11971849, y: 1.4543129, z: 2134.7102}
+    m_Value: {x: -1.1611614, y: 3.9276958, z: 170.00839}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -579,9 +579,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 5.758381
+    m_Target: 2.76361
     speed: 2
-    m_Value: 5.758381
+    m_Value: 2.76361
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -674,21 +674,21 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Junho/Resource/Card
+    - Assets/Junho/Prefabs
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Junho/Resource/Card
+  - Assets/Junho/Prefabs
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\junho\FunGameZem\My project (1)
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: ba230100
-    m_LastClickedID: 74682
+    scrollPos: {x: 0, y: 3.8000183}
+    m_SelectedIDs: 2e620000
+    m_LastClickedID: 25134
     m_ExpandedIDs: 00000000186200001a6200001c6200001e620000206200002262000024620000306200004e890000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -742,10 +742,10 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 22b30100
-    m_LastClickedInstanceID: 111394
+    m_SelectedInstanceIDs: 76a5fdff
+    m_LastClickedInstanceID: -154250
     m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: c6230000c8630000ee87000012880000bcda0000b4da0000e4230100ae7f0100ca7f0100ba7f0100c67f0100b67f0100
+    m_ExpandedInstanceIDs: c6230000c8630000ee87000012880000bcda0000b4da0000e4230100ae7f0100ca7f0100ba7f0100c67f0100b67f0100bc780100
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -795,7 +795,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 507.2
-    width: 773.4
+    width: 1180.6
     height: 276.19998
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
@@ -820,8 +820,8 @@ MonoBehaviour:
     y: 0
     width: 354.40002
     height: 730.8
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}

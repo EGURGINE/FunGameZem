@@ -54,7 +54,7 @@ public class Inventory : MonoBehaviour
                 InVen[i] = Instantiate(spell[Random.Range(0,spell.Length)]);
                 //InVen[i] = Instantiate(spell[Random.Range(0, MaxSpell)]);
                 //InVen[i].GetComponent<Spell>().invenPos = cell[i].transform.position;
-                InVen[i].GetComponent<Items>().invenPos = cell[i].transform.position;
+                InVen[i].GetComponent<Spell>().invenPos = cell[i].transform.position;
                 InVen[i].transform.position = cell[i].transform.position;
 
                 break;

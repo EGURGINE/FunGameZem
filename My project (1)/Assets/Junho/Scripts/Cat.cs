@@ -114,24 +114,24 @@ public class Cat : MonoBehaviour
         switch (catType)
         {
             case CatType.a:
+                hp = 10 +  star * 10;
+                dmg = 35 + star * 10;
+                break;                   
+            case CatType.b:
+                hp = 50 +  star * 10;
+                dmg = 15 + star * 10;
+                break;                   
+            case CatType.c:                  
+                hp = 90 +  star * 10;
+                dmg = 12 + star * 10;
+                break;                   
+            case CatType.d:                  
                 hp = 100 + star * 10;
                 dmg = 10 + star * 10;
-                break;            
-            case CatType.b:       
-                hp = 130 + star * 10;
-                dmg = 7 + star * 10;
-                break;            
-            case CatType.c:       
-                hp = 200 + star * 10;
-                dmg = 5 + star * 10;
-                break;            
-            case CatType.d:       
-                hp = 50 + star * 10;
-                dmg = 30 + star * 10;
-                break;            
-            case CatType.e:       
+                break;                   
+            case CatType.e:                  
                 hp = 150 + star * 10;
-                dmg = 15 + star * 10;
+                dmg = 5 +  star * 10;
                 break;            
         }
         dmgTxt.text = dmg.ToString();

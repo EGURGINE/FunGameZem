@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Junho/Scenes/Main.unity
     guid: 38605aa3033ce284fac3fc93d7d28c1a
+  - enabled: 1
+    path: Assets/Junho/Scenes/GameOver.unity
+    guid: dbd7a485e3fbdd241b4282514f001d5a
+  - enabled: 1
+    path: Assets/Junho/Scenes/Clear.unity
+    guid: c3d39a1d221e3fb4a9d11fc145afba37
   m_configObjects: {}

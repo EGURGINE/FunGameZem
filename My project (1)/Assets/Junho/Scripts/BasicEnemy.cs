@@ -4,10 +4,15 @@ using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 public enum EnemyType
 {
-    Archer,
-    Warrior
+    Red,
+    Yellow,
+    Blue,
+    Purple,
+    Green,
+    Boos
 }
 public class BasicEnemy : MonoBehaviour
 {
@@ -61,6 +66,7 @@ public class BasicEnemy : MonoBehaviour
     }
     private void Die()
     {
+        if (enemyType == EnemyType.Boos) SceneManager.LoadScene("Clear");
         GameManager.Instance.Enemys.Remove(gameObject);
         gameObject.SetActive(false);
     }
@@ -90,13 +96,29 @@ public class BasicEnemy : MonoBehaviour
     {
         switch (enemyType)
         {
-            case EnemyType.Warrior:
+            case EnemyType.Red:
                 hp = 150;
                 dmg = 10;
                 break;
-            case EnemyType.Archer:
+            case EnemyType.Yellow:
                 hp = 75;
                 dmg = 15;
+                break;
+            case EnemyType.Blue:
+                hp = 50;
+                dmg = 20;
+                break;
+            case EnemyType.Purple:
+                hp = 10;
+                dmg = 30;
+                break;
+            case EnemyType.Green:
+                hp = 100;
+                dmg = 12;
+                break;
+            case EnemyType.Boos:
+                hp = 500;
+                dmg = 30;
                 break;
         }
         hpTxt.text = hp.ToString();

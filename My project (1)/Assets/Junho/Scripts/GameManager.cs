@@ -1,14 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using DG.Tweening;
 using TMPro;
+using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     static public GameManager Instance;
 
-    const int enemyTypeNum = 2;
+    const int enemyTypeNum = 5;
     const int catsTypeNum = 5;
     const int starMax = 3;
     
@@ -18,13 +17,14 @@ public class GameManager : MonoBehaviour
     public List<GameObject> ActiveEnemys = new List<GameObject>();
     public List<GameObject> Enemys = new List<GameObject>();
     [SerializeField] private GameObject boss;
+    [SerializeField] private GameObject enemyBg;
 
     int Count=0;
     public List<GameObject> Spell = new List<GameObject>(0);
 
     public GameObject stageSlect;
 
-    private int Waeve = 1;
+    [SerializeField] private int Waeve = 1;
     [SerializeField] private TextMeshProUGUI waeveNum;
     private int money;
     [SerializeField] private TextMeshProUGUI moneyTxt;
@@ -111,6 +111,7 @@ public class GameManager : MonoBehaviour
     private void GameOver()
     {
         print("Die");
+        SceneManager.LoadScene("GameOver");
     }
     private void NextWave()
     {
@@ -120,15 +121,8 @@ public class GameManager : MonoBehaviour
         Waeve++;
         waeveNum.text = Waeve.ToString();
         Spell.Clear();
-        foreach (var enemy in ActiveEnemys)
-        {
-            Enemys.Add(enemy);
-            int enemyType = Random.Range(0, enemyTypeNum);
-            Enemys[Count].SetActive(true);
-            Enemys[Count].GetComponent<BasicEnemy>().SpawnEnemy((EnemyType)enemyType);
-            Count++;
-        }
-        Count = 0;
+        Inventory.Instance.SpellDrop();
+
         foreach (var cat in ActiveCat)
         {
             CatsSelect.Add(cat);
@@ -136,9 +130,28 @@ public class GameManager : MonoBehaviour
             int star = Random.Range(0, 3);
             CatsSelect[Count].SetActive(true);
             CatsSelect[Count].GetComponent<Cat>().SpawnCat(star, (CatType)catType);
-            Count ++;
+            Count++;
         }
-        Inventory.Instance.SpellDrop();
+
+        Count = 0;
+        if (Waeve != 10)
+        {
+            foreach (var enemy in ActiveEnemys)
+            {
+                Enemys.Add(enemy);
+                int enemyType = Random.Range(0, enemyTypeNum);
+                Enemys[Count].SetActive(true);
+                Enemys[Count].GetComponent<BasicEnemy>().SpawnEnemy((EnemyType)enemyType);
+                Count++;
+            }
+        }
+        else
+        {
+            enemyBg.SetActive(false);
+            Enemys.Add(boss);
+            boss.SetActive(true);
+            boss.GetComponent<BasicEnemy>().SpawnEnemy(EnemyType.Boos);
+        }
     }
     public void Reroll()
     {
